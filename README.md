@@ -81,10 +81,26 @@ npm run check        # confere a sintaxe de todos os arquivos
 
 A lógica de `analise.js` e `demo.js` não depende do navegador, então dá para testar com `node` direto.
 
+## Colocando online (Render)
+
+O Render roda o servidor Node e dá um endereço https. Serve para os dois modos.
+
+1. Suba o código para a branch `main` do GitHub.
+2. No Render (render.com), clique em **New +** e depois **Web Service**, e escolha este repositório.
+3. Preencha: **Runtime** Node, **Build Command** `npm install` (ou deixe vazio), **Start Command** `npm start`.
+4. Em **Environment**, adicione `SPOTIFY_CLIENT_ID` com o Client ID do seu app.
+5. Crie o serviço. O Render mostra o endereço, algo como `https://eco-xxxx.onrender.com`.
+6. No painel do Spotify for Developers, abra o app, **Settings**, e em **Redirect URIs** adicione `https://eco-xxxx.onrender.com/callback` (o mesmo endereço do passo 5, com `/callback`).
+
+O servidor descobre o endereço sozinho pela variável `RENDER_EXTERNAL_URL`. Em outras hospedagens, defina `HOST=0.0.0.0` e `SPOTIFY_REDIRECT_URI`.
+
+Apps novos do Spotify ficam em modo de desenvolvimento: só entram as pessoas cadastradas em **User Management** no painel do app.
+
 ## Privacidade
 
-- O servidor só aceita conexões da própria máquina (`127.0.0.1`).
-- Os tokens do Spotify ficam só na memória do servidor e somem quando você o desliga.
+- Na sua máquina, o servidor só aceita conexões locais (`127.0.0.1`). Online, aceita de fora, e o login do Spotify só funciona para quem você cadastrou.
+- Os arquivos de histórico são lidos no navegador e nunca são enviados ao servidor.
+- Os tokens do Spotify ficam só na memória do servidor e somem quando ele reinicia.
 - O `.gitignore` já bloqueia o `.env` e os arquivos de histórico, para eles não irem para o GitHub por acidente.
 
 ## Licença

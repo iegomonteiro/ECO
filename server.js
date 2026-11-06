@@ -31,13 +31,25 @@ carregarEnv(path.join(__dirname, '.env'));
 
 const PORT = Number(process.env.PORT) || 3000;
 const CLIENT_ID = (process.env.SPOTIFY_CLIENT_ID || '').trim();
-const REDIRECT_URI = process.env.SPOTIFY_REDIRECT_URI || `http://127.0.0.1:${PORT}/callback`;
+// Na sua máquina: só aceita conexões locais. Online (Render ou HOST=0.0.0.0): aceita de fora.
+const HOST = process.env.HOST || (process.env.RENDER ? '0.0.0.0' : '127.0.0.1');
+const URL_PUBLICA = (process.env.RENDER_EXTERNAL_URL || '').replace(/\/+$/, '');
+const REDIRECT_URI =
+  process.env.SPOTIFY_REDIRECT_URI || (URL_PUBLICA ? `${URL_PUBLICA}/callback` : `http://127.0.0.1:${PORT}/callback`);
+const COOKIE_SEGURO = REDIRECT_URI.startsWith('https://') ? '; Secure' : '';
 const SCOPES = 'user-top-read user-read-recently-played';
 const PUBLIC_DIR = path.join(__dirname, 'public');
 const CONFIGURADO = CLIENT_ID !== '' && CLIENT_ID !== 'cole_aqui_o_client_id';
 
 // ---------- sessões em memória ----------
 const sessoes = new Map();
+const VIDA_SESSAO_MS = 24 * 3600 * 1000;
+
+// Online, qualquer visitante cria uma sessão: limpa as antigas para a memória não crescer.
+setInterval(() => {
+  const limite = Date.now() - VIDA_SESSAO_MS;
+  for (const [sid, s] of sessoes) if ((s.criadaEm || 0) < limite) sessoes.delete(sid);
+}, 3600 * 1000).unref();
 
 function pegarSessao(req, res) {
   const cookies = {};
@@ -48,8 +60,8 @@ function pegarSessao(req, res) {
   let sid = cookies.sid;
   if (!sid || !sessoes.has(sid)) {
     sid = crypto.randomBytes(24).toString('base64url');
-    sessoes.set(sid, {});
-    res.setHeader('Set-Cookie', `sid=${sid}; HttpOnly; SameSite=Lax; Path=/; Max-Age=86400`);
+    sessoes.set(sid, { criadaEm: Date.now() });
+    res.setHeader('Set-Cookie', `sid=${sid}; HttpOnly; SameSite=Lax; Path=/; Max-Age=86400${COOKIE_SEGURO}`);
   }
   return sessoes.get(sid);
 }
@@ -251,9 +263,9 @@ const servidor = http.createServer((req, res) => {
   });
 });
 
-// Só aceita conexões da própria máquina.
-servidor.listen(PORT, '127.0.0.1', () => {
-  console.log(`Eco rodando em http://127.0.0.1:${PORT}`);
+servidor.listen(PORT, HOST, () => {
+  console.log(`Eco rodando em http://${HOST}:${PORT}`);
+  console.log(`Redirect URI do Spotify: ${REDIRECT_URI}`);
   if (!CONFIGURADO) {
     console.log('Aviso: SPOTIFY_CLIENT_ID não definido. O modo "Toda a vida" funciona; o de 12 meses precisa do .env.');
   }
