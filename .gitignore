@@ -1,0 +1,6 @@
+.env
+node_modules/
+Streaming_History*.json
+StreamingHistory*.json
+*.zip
+.DS_Store
