@@ -25,7 +25,9 @@ body { background: radial-gradient(120% 70% at 50% -10%, #10251a 0%, #080a09 60%
 .btn.sec:hover { background: transparent; box-shadow: inset 0 0 0 1px var(--sinal); }
 .seg { border-radius: 999px; overflow: hidden; }
 .seg button[aria-pressed='true'] { background: var(--sinal); color: #080a09; }
-.porta { border-radius: 28px; border: 1px solid var(--linha); background: linear-gradient(160deg, rgba(16, 37, 26, 0.85), rgba(8, 10, 9, 0.6)); transform-style: preserve-3d; will-change: transform; transition: border-color 0.3s; }
+.porta { padding: 32px 40px; margin-top: 16px; border-radius: 28px; border: 1px solid var(--linha); background: linear-gradient(160deg, rgba(16, 37, 26, 0.85), rgba(8, 10, 9, 0.6)); transform-style: preserve-3d; will-change: transform; transition: border-color 0.3s; }
 .porta:hover { border-color: rgba(181, 255, 112, 0.5); }
 .codigo i { background: var(--sinal); }
+.portas { padding-top: 40px; }
+@media (max-width: 760px) { .porta { padding: 24px; } }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }

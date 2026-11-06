@@ -49,7 +49,6 @@
     l.from('.hero .kicker', { opacity: 0, y: 12, duration: 0.7 })
      .from('.hero h1', { opacity: 0, y: 60, duration: 1.1 }, '-=0.3')
      .from('.hero p', { opacity: 0, y: 20, duration: 0.8 }, '-=0.6')
-     .from('.codigo i', { scaleY: 0, transformOrigin: 'bottom', duration: 0.9, stagger: { each: 0.008 } }, '-=0.6')
      .from('.porta', { opacity: 0, y: 40, duration: 0.9, stagger: 0.12 }, '-=0.7');
   }
 
