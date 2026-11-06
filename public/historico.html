@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Toda a vida — Eco</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/tema.css">
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js" defer></script>
+</head>
+<body>
+  <header class="topo">
+    <div class="wrap">
+      <a class="marca" href="/">Eco</a>
+      <nav aria-label="Principal">
+        <a href="/ano">12 meses</a>
+        <a href="/historico" aria-current="page">Toda a vida</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <p id="aviso" class="aviso" role="status" hidden></p>
+
+    <section id="entrada" class="pagina">
+      <h1>Toda a vida</h1>
+      <p class="lead">O Spotify guarda cada música que você já ouviu, com dia e hora. Peça esse arquivo e o painel mostra a sua história inteira.</p>
+
+      <ol class="passos">
+        <li>Entre em spotify.com/account/privacy e faça login.</li>
+        <li>Em "Baixar seus dados", marque <strong>Histórico de streaming estendido</strong> e peça os dados.</li>
+        <li>Confirme pelo e-mail que o Spotify enviar. O arquivo chega em até 30 dias, quase sempre em poucos.</li>
+        <li>Escolha aqui o .zip inteiro ou todos os arquivos que começam com Streaming_History_Audio.</li>
+      </ol>
+
+      <div class="solta">
+        <p><strong>Solte os arquivos aqui</strong> ou escolha no computador.</p>
+        <div class="acoes">
+          <button type="button" class="btn" id="escolher">Escolher arquivos</button>
+          <button type="button" class="btn sec" id="demo">Ver com dados de exemplo</button>
+        </div>
+        <input type="file" id="arquivos" accept=".json,.zip" multiple hidden>
+        <p id="estado-leitura" role="status"></p>
+        <p class="privacidade">Os arquivos são lidos no seu navegador. Nada é enviado para nenhum servidor.</p>
+      </div>
+    </section>
+
+    <div id="painel" hidden>
+      <section class="pagina" style="padding-bottom:0">
+        <h1 style="font-size:clamp(28px,4vw,44px)">Toda a vida</h1>
+        <p class="resumo" id="resumo"></p>
+        <p class="resumo-sub" id="resumo-sub"></p>
+
+        <div class="faixa-codigo">
+          <canvas id="codigo" role="img" aria-label="Uma linha para cada dia do seu histórico. A altura mostra quanto você ouviu; a cor, o artista do dia."></canvas>
+          <p class="legenda">Cada linha é um dia. A altura mostra quanto você ouviu; a cor, o artista mais ouvido daquele dia.</p>
+        </div>
+
+        <div class="ferramentas" style="margin-top:32px">
+          <label for="excluidos">Ignorar artistas:</label>
+          <input id="excluidos" class="campo" type="text" placeholder="Nomes separados por vírgula">
+          <button type="button" class="btn sec" id="aplicar">Aplicar</button>
+          <button type="button" class="btn sec" id="trocar">Trocar arquivos</button>
+        </div>
+      </section>
+
+      <section class="bloco">
+        <h2>Seus favoritos de todos os tempos</h2>
+        <div class="ferramentas">
+          <div class="seg" role="group" aria-label="O que listar">
+            <button type="button" data-entidade="artistas" aria-pressed="true">Artistas</button>
+            <button type="button" data-entidade="faixas" aria-pressed="false">Músicas</button>
+            <button type="button" data-entidade="albuns" aria-pressed="false">Álbuns</button>
+          </div>
+          <div class="seg" role="group" aria-label="Ordenar por">
+            <button type="button" data-metrica="ms" aria-pressed="true">Por horas</button>
+            <button type="button" data-metrica="plays" aria-pressed="false">Por reproduções</button>
+          </div>
+        </div>
+        <ol class="lista" id="top-lista"></ol>
+      </section>
+
+      <section class="bloco">
+        <h2>Ano a ano</h2>
+        <p class="nota">Os três artistas que mais tocaram em cada ano.</p>
+        <div id="anos-lista" style="margin-top:16px"></div>
+      </section>
+
+      <section class="bloco">
+        <h2>Mês a mês</h2>
+        <p class="nota">Quanto você ouviu em cada mês. Passe o mouse para ver o valor.</p>
+        <div class="meses" id="meses-barras"></div>
+        <div class="eixo" id="meses-eixo"></div>
+      </section>
+
+      <section class="bloco">
+        <h2>Quando você ouve</h2>
+        <p class="nota">Quanto mais forte a cor, mais música naquele dia da semana e hora.</p>
+        <div class="calor" id="calor"></div>
+      </section>
+
+      <section class="bloco">
+        <h2>Recordes</h2>
+        <dl class="recordes" id="recordes"></dl>
+      </section>
+    </div>
+  </main>
+
+  <footer class="rodape">
+    <div class="wrap">Roda só no seu computador. Seus dados não saem dele.</div>
+  </footer>
+
+  <script src="/js/util.js"></script>
+  <script src="/js/analise.js"></script>
+  <script src="/js/demo.js"></script>
+  <script src="/js/historico.js"></script>
+  <script src="/js/efeitos.js" defer></script>
+</body>
+</html>

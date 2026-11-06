@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Últimos 12 meses — Eco</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/tema.css">
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js" defer></script>
+</head>
+<body>
+  <header class="topo">
+    <div class="wrap">
+      <a class="marca" href="/">Eco</a>
+      <nav aria-label="Principal">
+        <a href="/ano" aria-current="page">12 meses</a>
+        <a href="/historico">Toda a vida</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <p id="aviso" class="aviso" role="status" hidden></p>
+
+    <section id="conectar" class="pagina" hidden>
+      <h1>Últimos 12 meses</h1>
+      <p class="lead">Conecte sua conta do Spotify para ver seus artistas, músicas e gêneros mais ouvidos no último ano.</p>
+      <p style="margin-top:32px"><a id="botao-conectar" class="btn" href="/login">Conectar com o Spotify</a></p>
+      <p class="privacidade" style="margin-top:16px">O login acontece no site do Spotify. Este painel só lê seus rankings e as músicas recentes.</p>
+    </section>
+
+    <div id="painel" hidden>
+      <section class="destaque" id="destaque" aria-live="polite"></section>
+
+      <div class="bloco" style="margin-top:32px">
+        <div class="ferramentas">
+          <div class="seg" id="periodos" role="group" aria-label="Período"></div>
+          <a class="btn sec" href="/logout">Sair</a>
+        </div>
+      </div>
+
+      <div class="bloco duas">
+        <section>
+          <h2>Artistas</h2>
+          <ol class="lista" id="artistas"></ol>
+        </section>
+        <section>
+          <h2>Músicas</h2>
+          <ol class="lista" id="faixas"></ol>
+        </section>
+      </div>
+
+      <section class="bloco" id="bloco-generos">
+        <h2>Gêneros</h2>
+        <p class="nota">Calculados a partir dos seus artistas mais ouvidos.</p>
+        <div class="barras-genero" id="generos"></div>
+      </section>
+
+      <section class="bloco">
+        <h2>Tocou agora há pouco</h2>
+        <p class="nota">O Spotify guarda só as últimas 50 reproduções. Para ver tudo, use o painel Toda a vida.</p>
+        <ul class="lista" id="recentes"></ul>
+      </section>
+    </div>
+  </main>
+
+  <footer class="rodape">
+    <div class="wrap">Roda só no seu computador. Seus dados não saem dele.</div>
+  </footer>
+
+  <script src="/js/util.js"></script>
+  <script src="/js/ano.js"></script>
+  <script src="/js/efeitos.js" defer></script>
+</body>
+</html>

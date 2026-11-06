@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Eco — seu painel de escuta</title>
+  <meta name="description" content="Veja tudo o que você já ouviu no Spotify: os últimos 12 meses ou a vida inteira.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/tema.css">
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js" defer></script>
+</head>
+<body>
+  <header class="topo">
+    <div class="wrap">
+      <a class="marca" href="/">Eco</a>
+      <nav aria-label="Principal">
+        <a href="/ano">12 meses</a>
+        <a href="/historico">Toda a vida</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="kicker">Every song tells a story</div>
+      <h1>Your music.<em>Your history.</em></h1>
+      <p>Um painel só seu, que roda na sua máquina. Dois jeitos de olhar para a sua música: o último ano, direto da sua conta, ou cada dia desde a primeira reprodução.</p>
+      <div class="codigo" id="codigo-decorativo" aria-hidden="true"></div>
+    </section>
+
+    <section class="portas" aria-label="Escolha o painel">
+      <a class="porta" href="/ano">
+        <div>
+          <h2>Últimos 12 meses</h2>
+          <p>Conecte sua conta do Spotify e veja seus artistas, músicas e gêneros mais ouvidos, além do que tocou agora há pouco.</p>
+        </div>
+        <span class="btn">Conectar o Spotify</span>
+      </a>
+      <a class="porta" href="/historico">
+        <div>
+          <h2>Toda a vida</h2>
+          <p>Envie o arquivo de histórico que o Spotify manda por e-mail e veja favoritos, anos, horários e recordes desde o primeiro dia.</p>
+        </div>
+        <span class="btn sec">Abrir o histórico</span>
+      </a>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <div class="wrap">Roda só no seu computador. Seus dados não saem dele.</div>
+  </footer>
+
+  <script src="/js/home.js"></script>
+  <script src="/js/efeitos.js" defer></script>
+</body>
+</html>
